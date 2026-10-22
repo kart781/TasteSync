@@ -8,10 +8,10 @@
 - Dishes: one-tap loved / fine / not ratings; full dish rankings later.
 - Open food-lover groups and community feed: after Gate B.
 - No paid ranking ever; revenue (Plus, restaurant analytics, booking fees) only after Gate B.
-- G1 for docs/PRD.md v4: pending human approval.
+- G1 for docs/PRD.md v4: approved by the human on 2026-10-22 ("push to main").
 
 ## 2026-10-22 — Taste Capsule and Blend
 - Decided by: human (Karthik).
 - Taste Capsule (monthly stats, Spotify Sound Capsule style) and Blend (two-person taste overlap) are planned for after Gate B; no MVP change.
 - Blend starts by invite and accept between mutual friends; either can leave. Two-person first, Circle Blend later.
-- Part of PRD v4; G1 still pending.
+- Part of PRD v4; approved with it (G1, 2026-10-22).
