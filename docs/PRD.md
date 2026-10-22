@@ -2,7 +2,7 @@
 
 Oct 18, 2026 · updated Oct 22, 2026 · @Karthik Bhusarapu
 
-**Changes in v4 (Oct 22, 2026):** iOS-only launch; Android and web are out of scope for now. TasteSync is repositioned from a friends' food diary to the food app people trust most when deciding where to eat, with three non-negotiables: no undisclosed paid content, reviews backed by proof of visit, and no paid ranking. New sections: competition, core user journeys, trust (verification and anti-fraud) and making money without breaking trust. Proof of visit is a receipt scan or a delivery order screenshot, read on the phone; unverified visits can still be shared with friends and circles but never get a badge or count toward city scores, shelves or public reviews. Dishes get a one-tap rating, taste match moves into the MVP, "hosted" becomes "comped or hosted" with strikes for not disclosing, and the logging target drops to 30 seconds. Open food-lover groups wait for Gate B.
+**Changes in v4 (Oct 22, 2026):** iOS-only launch; Android and web are out of scope for now. TasteSync is repositioned from a friends' food diary to the food app people trust most when deciding where to eat, with three non-negotiables: no undisclosed paid content, reviews backed by proof of visit, and no paid ranking. New sections: competition, core user journeys, trust (verification and anti-fraud) and making money without breaking trust. Proof of visit is a receipt scan or a delivery order screenshot, read on the phone; unverified visits can still be shared with friends and circles but never get a badge or count toward city scores, shelves or public reviews. Dishes get a one-tap rating, taste match moves into the MVP, "hosted" becomes "comped or hosted" with strikes for not disclosing, and the logging target drops to 30 seconds. Open food-lover groups wait for Gate B. Taste Capsule (monthly stats) and Blend (two-person taste overlap) are planned for after Gate B.
 
 **Changes in v3.1 (Oct 21, 2026):** native iOS and Android apps built with Expo, plus a TypeScript API (replaces the PWA and FastAPI). Comparisons run on the phone and are sent with the visit. Schema fixes: `comparisons.visit_id`, account deletion no longer blocked by foreign keys, Firebase sign-in, HMAC phone hashes, and new `jobs`, `blocks`, `push_tokens` and `events` tables. Rules added for ranking audience and hosted weight, the MVP friends' score, and duplicate rankings on place merge.
 
@@ -122,6 +122,8 @@ Only steps 1, 5 and 6 are required. Everything else can be added later from the 
 | Profile | Top 4 places, stats, lists, recent diary, verified share and taste match with you | Identity and a reputation built on proven visits |
 | Share cards | An image of a visit, a list or a top 10, sized for WhatsApp and Instagram stories | The main way new people hear about the app |
 | Year in Food | Places, dishes, areas and top picks for the year | A yearly reason to post and invite |
+| Taste Capsule (after Gate B) | Monthly stats on places, areas, cuisines and top picks | A reason to come back each month, and a card to post |
+| Blend (after Gate B) | Your taste match with a friend, places you both loved, and their picks you haven't tried | Turns a friend's history into your next meal; a card people share |
 
 ## Trust: verification and anti-fraud
 
@@ -358,6 +360,36 @@ Each dish tagged on a visit gets a one-tap rating: loved, fine or not for me. Di
 - **Dish search:** searching for a dish, such as "biryani" within 3 km, lists places by the share of verified diners who loved that dish there.
 - Full dish rankings, with comparisons per dish type, come later if people ask for them.
 
+### Taste Capsule and Blend (after Gate B)
+
+Two features borrowed from Spotify's Sound Capsule and Blend. Both are built from data the MVP already stores, so they need no new logging.
+
+**Taste Capsule** is a monthly summary of your eating, with Year in Food as the yearly version.
+- **What it shows:**
+  - places visited, and how many were new
+  - the dine-in and delivery split
+  - areas and cuisines covered
+  - your top 3 places and top dish of the month
+  - your most-loved new find
+  - your verified share
+  - your longest logging streak
+  - how your taste moved, such as "more delivery, more Old City"
+- **Data:** all your own visits, including private ones, because it is your data. A Capsule is shown only to you, unless you share it.
+- **Share card:** for WhatsApp and Instagram stories, with the watermark. It shows counts, plus place names from public and friends-level visits only, never private or circle-only places.
+
+**Blend** compares your taste with one friend's.
+- **Starting and leaving:** you send a Blend invite to a mutual friend; once they accept, both of you see the Blend. Either person can leave at any time, which deletes it for both.
+- **What it shows:**
+  - **Taste match:** the formula above, hidden under 3 shared places.
+  - **Places you both loved.**
+  - **Where you disagree most:** your biggest score gaps.
+  - **Their loved places you haven't tried:** verified visits first, near your location bar.
+  - **Your loved places they haven't tried.**
+  - **A shared want-to-try list** both of you can add to.
+- **Privacy:** a Blend shows only visits the other person's audience settings already let you see: public, friends, or a circle you are both in. It never reveals private visits, or circle-only visits from circles you are not in.
+- **Share card:** the match percentage and two or three shared loves.
+- **Circle Blend** comes after the two-person Blend. It shows a whole circle's shared loves and the best place nobody in it has tried yet, and can start a "Where tonight?" poll.
+
 ## Users and hypotheses
 
 The first users are people in Hyderabad who eat out or order in several times a week with the same friends, and who already argue in group chats about where to go.
@@ -398,11 +430,11 @@ The MVP is the full personal loop, proof of visit and circles, for Hyderabad onl
 | Dishes | One-tap dish ratings, "What to order here", dish search by distance | Full dish rankings; on-device photo recognition to tag the dish | — |
 | Delivery | Delivery checks, "Arrives hot", "Packaging holds", "Orders correct" and "Travels well" on place pages | "Good for delivery" filter; dish travel scores | Links into Swiggy or Zomato |
 | Diary and lists | Diary, want-to-try, custom lists | Collaborative public lists | Exportable guides |
-| Social | Follow, feed, likes, comments, profiles with top 4 and verified share | Taste-matched suggestions of people to follow | Direct messages |
+| Social | Follow, feed, likes, comments, profiles with top 4 and verified share | Taste-matched suggestions of people to follow; Blend with a friend, then Circle Blend | Direct messages |
 | Circles and community | Private circles: feed, board, shared lists, eat-out and order-in polls, ate-together tags, invite links | Open food-lover groups and a community feed (after Gate B); monthly recap | — |
 | Places | Hyderabad catalogue, add-a-place with review, dish lists, price bands | Opening hours, menus | Ordering inside the app |
 | Discover and location | Location bar with GPS, saved places on the phone and area picker; Eat out / Order in; Discover with friends', want-to-try and circle shelves and all places nearby | Data-driven shelves per area once 8 places qualify; a "For you" shelf weighted by taste match | Curated or paid collections; storing location history |
-| Sharing | Share cards for visits, lists and top 10 | Instagram story export with a watermark; food passport, streaks and Year in Food | Embeds on other sites |
+| Sharing | Share cards for visits, lists and top 10 | Instagram story export with a watermark; Taste Capsule (monthly) and Year in Food; food passport and streaks | Embeds on other sites |
 | iOS extras | — | Home-screen widget ("friends ate here this week"); a Live Activity reminding you to rate a meal | — |
 | Platforms | iOS | Android from the same code; web pages beyond share links | — |
 
@@ -474,6 +506,7 @@ Start with about 500 places across 10 areas: Jubilee Hills, Banjara Hills, Gachi
 | Share cards | Visits, lists and top 10s posted to WhatsApp and Instagram link back to the app |
 | "Where tonight?" | A poll link shared to a group chat works for non-members, who join to vote |
 | Year in Food | A yearly recap people want to post |
+| Blend cards (after Gate B) | A Blend card posted to WhatsApp or Instagram shows two friends' match; people join to Blend with their own friends |
 
 ### 4. Open area by area
 
@@ -546,6 +579,9 @@ Keep moderation small at launch: one queue for new places, reports, proof flags,
 | Chosen point outside Hyderabad | Show the nearest launch area and a note that TasteSync is Hyderabad-only for now |
 | An area with few rankings | Hide data-driven shelves there; show friends' shelves and all places nearby |
 | A minor signs up | Block sign-up under 18 in v1 and ask for date of birth at sign-up |
+| A Blend partner makes a visit private | It disappears from the Blend at once |
+| A Blend partner unfollows or blocks | The Blend is deleted for both |
+| A Blend with fewer than 3 shared places | Show what is shared and "rank a few more to see your match", with no percentage |
 
 ### Proof of visit
 
@@ -587,6 +623,7 @@ Every feature reads from visits (what you ate) and rankings (where it sits in yo
 - Sign-in uses Firebase phone auth; users stores the Firebase id and an HMAC of the phone number, not the number itself.
 - Account deletion: foreign keys that point at a user either cascade or are set to null. A circle admin who deletes their account hands admin to the longest-standing member first; a circle with no other members is deleted.
 - The feed is built at read time from visits, rankings and lists in the MVP; add a feed table only when that gets slow.
+- Taste Capsule and Blend (after Gate B) are computed at read time from visits, rankings and taste_matches; a `blends` table (two users and a created date) is added when Blend is built.
 - Discover shelves are defined in code (`packages/core/src/discovery.ts`), not in tables. The nightly job writes each place's shelf inputs (heat, recent visitors, median price) to place_scores, and the API filters them by the requested point and radius. Locations in requests are never written to the database or the logs.
 - Audience rules are enforced in the API, and each read query filters by them. Test them carefully: privacy bugs would be the worst kind of bug here.
 
@@ -704,7 +741,7 @@ When the search is done, places at or below the position shift down by one and e
 
 ### Analytics events
 
-Track these from M2 onward, since the launch gates depend on them: log\_started, log\_saved (with duration, mode, checks answered), comparison\_answered, comparison\_skipped, visit\_shared (with channel), invite\_sent, invite\_accepted (with source), circle\_created, poll\_created, poll\_closed, search\_performed (with result picked or place added), place\_added, location\_set (with source: gps, saved or area; never the coordinates), discover\_shelf\_opened (with shelf), proof\_started and proof\_result (with method and outcome; never the extracted text), dish\_rated, comped\_disclosed.
+Track these from M2 onward, since the launch gates depend on them: log\_started, log\_saved (with duration, mode, checks answered), comparison\_answered, comparison\_skipped, visit\_shared (with channel), invite\_sent, invite\_accepted (with source), circle\_created, poll\_created, poll\_closed, search\_performed (with result picked or place added), place\_added, location\_set (with source: gps, saved or area; never the coordinates), discover\_shelf\_opened (with shelf), capsule\_viewed, capsule\_shared, blend\_invited, blend\_accepted, blend\_left, proof\_started and proof\_result (with method and outcome; never the extracted text), dish\_rated, comped\_disclosed.
 
 ### Using this PRD with Claude Code
 
