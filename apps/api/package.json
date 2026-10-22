@@ -1,0 +1,31 @@
+{
+  "name": "@tastesync/api",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "db:dev": "tsx scripts/dev-db.ts",
+    "dev": "tsx watch --env-file=.env src/server.ts",
+    "start": "tsx src/server.ts",
+    "import-places": "tsx --env-file=.env scripts/import-places.ts",
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "@electric-sql/pglite": "^0.5.11",
+    "@electric-sql/pglite-postgis": "^0.2.11",
+    "@electric-sql/pglite-socket": "^0.2.14",
+    "@types/node": "^20.19.43",
+    "tsx": "^4.23.15",
+    "typescript": "^7.0.2",
+    "vitest": "^3.2.7"
+  },
+  "dependencies": {
+    "@tastesync/core": "*",
+    "csv-parse": "^7.0.3",
+    "fastify": "^5.12.7",
+    "firebase-admin": "^14.5.0",
+    "postgres": "^3.4.9",
+    "zod": "^4.6.7"
+  }
+}

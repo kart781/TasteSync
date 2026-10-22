@@ -1,0 +1,17 @@
+{
+  "name": "tastesync",
+  "private": true,
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "api": "npm run dev -w @tastesync/api",
+    "mobile": "npm start -w @tastesync/mobile",
+    "test": "npm test --workspaces --if-present",
+    "typecheck": "npm run typecheck --workspaces --if-present"
+  },
+  "engines": {
+    "node": ">=22"
+  }
+}
