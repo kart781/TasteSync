@@ -1,10 +1,10 @@
 # TasteSync
 
-A food diary you keep with your friends: log, rank, share. See [docs/PRD.md](docs/PRD.md).
+The food app you can trust: log, rank, verify, share. iOS first. See [docs/PRD.md](docs/PRD.md).
 
 | Folder | What |
 | --- | --- |
-| `apps/mobile` | iOS and Android app (Expo, Expo Router) |
+| `apps/mobile` | iOS app (Expo, Expo Router); Android later from the same code |
 | `apps/api` | API (Fastify, Postgres via `postgres.js`) |
 | `packages/core` | Ranking engine, score formulas and request schemas, shared by app and API |
 | `db/migrations` | Database schema (dbmate format) |
@@ -34,10 +34,10 @@ With `DEV_AUTH=true` (API) and `EXPO_PUBLIC_DEV_AUTH=true` (app), sign-in takes 
 ## Real phone sign-in (Firebase)
 
 1. Create a Firebase project and turn on Phone sign-in.
-2. Add an Android app and an iOS app with the id `app.tastesync`, or change it in `apps/mobile/app.json`. For Android, add your SHA-1 fingerprints.
-3. Put `google-services.json` and `GoogleService-Info.plist` in `apps/mobile/`. `app.config.ts` turns on the Firebase plugins once both files are present.
+2. Add an iOS app with the bundle id `app.tastesync`, or change it in `apps/mobile/app.json`.
+3. Put `GoogleService-Info.plist` in `apps/mobile/`. `app.config.ts` turns on the Firebase plugins once it is present.
 4. Download a service account key for the API and set `FIREBASE_SERVICE_ACCOUNT` in `apps/api/.env`.
-5. Set `EXPO_PUBLIC_DEV_AUTH=false` and build a development client: `npx eas-cli build --profile development`.
+5. Set `EXPO_PUBLIC_DEV_AUTH=false` and build a development client: `npx eas-cli build --profile development --platform ios`.
 
 ## Tests
 
